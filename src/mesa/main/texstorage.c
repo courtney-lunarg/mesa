@@ -39,6 +39,7 @@
 #include "texobj.h"
 #include "mipmap.h"
 #include "texstorage.h"
+#include "textureview.h"
 #include "mtypes.h"
 
 
@@ -417,8 +418,8 @@ texstorage(GLuint dims, GLenum target, GLsizei levels, GLenum internalformat,
          return;
       }
 
-      texObj->Immutable = GL_TRUE;
-      texObj->ImmutableLevels = levels;
+      _mesa_set_texture_view_state(ctx, texObj, target, levels);
+
    }
 }
 
