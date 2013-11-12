@@ -319,7 +319,7 @@ void radeon_draw_buffer(struct gl_context *ctx, struct gl_framebuffer *fb)
 #if 0
 	/* update viewport since it depends on window size */
 	if (ctx->Driver.Viewport) {
-		ctx->Driver.Viewport(ctx, ctx->Viewport.X, ctx->Viewport.Y,
+		ctx->Driver.Viewport(ctx, 0, ctx->Viewport.X, ctx->Viewport.Y,
 				     ctx->Viewport.Width, ctx->Viewport.Height);
 	} else {
 
@@ -410,7 +410,7 @@ void radeon_viewport(struct gl_context *ctx)
 {
 	radeonContextPtr radeon = RADEON_CONTEXT(ctx);
 	__DRIcontext *driContext = radeon->dri.context;
-	void (*old_viewport)(struct gl_context *ctx, GLint x, GLint y,
+	void (*old_viewport)(struct gl_context *ctx, GLuint idx, GLint x, GLint y,
 			     GLsizei w, GLsizei h);
 
 	if (_mesa_is_winsys_fbo(ctx->DrawBuffer)) {

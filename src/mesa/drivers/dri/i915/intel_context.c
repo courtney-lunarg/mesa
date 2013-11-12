@@ -271,7 +271,7 @@ intel_prepare_render(struct intel_context *intel)
 }
 
 static void
-intel_noninvalidate_viewport(struct gl_context *ctx, GLint x, GLint y,
+intel_noninvalidate_viewport(struct gl_context *ctx, GLuint idx, GLint x, GLint y,
                              GLsizei w, GLsizei h)
 {
     struct intel_context *intel = intel_context(ctx);
@@ -291,7 +291,7 @@ intel_noninvalidate_viewport(struct gl_context *ctx, GLint x, GLint y,
 }
 
 static void
-intel_viewport(struct gl_context *ctx, GLint x, GLint y, GLsizei w, GLsizei h)
+intel_viewport(struct gl_context *ctx, GLuint idx, GLint x, GLint y, GLsizei w, GLsizei h)
 {
     (void) x;
     (void) y;
