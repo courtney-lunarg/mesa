@@ -299,7 +299,7 @@ _mesa_init_driver_state(struct gl_context *ctx)
    ctx->Driver.LogicOpcode(ctx, ctx->Color.LogicOp);
    ctx->Driver.PointSize(ctx, ctx->Point.Size);
    ctx->Driver.PolygonStipple(ctx, (const GLubyte *) ctx->PolygonStipple);
-   ctx->Driver.Scissor(ctx, ctx->Scissor.X, ctx->Scissor.Y,
+   ctx->Driver.Scissor(ctx, 0, ctx->Scissor.X, ctx->Scissor.Y,
                        ctx->Scissor.Width, ctx->Scissor.Height);
    ctx->Driver.ShadeModel(ctx, ctx->Light.ShadeModel);
    ctx->Driver.StencilFuncSeparate(ctx, GL_FRONT,
