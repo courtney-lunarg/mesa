@@ -1400,8 +1400,8 @@ static void radeonViewport( struct gl_context *ctx, GLuint idx, GLint x, GLint y
    radeon_viewport(ctx);
 }
 
-static void radeonDepthRange( struct gl_context *ctx, GLclampd nearval,
-			      GLclampd farval )
+static void radeonDepthRange( struct gl_context *ctx, GLuint idx,
+                             GLclampd nearval, GLclampd farval )
 {
    radeonUpdateWindow( ctx );
 }

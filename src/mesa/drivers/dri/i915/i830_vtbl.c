@@ -840,7 +840,7 @@ i830_update_draw_buffer(struct intel_context *intel)
    ctx->Driver.Scissor(ctx, 0, ctx->Scissor.X, ctx->Scissor.Y,
 		       ctx->Scissor.Width, ctx->Scissor.Height);
 
-   ctx->Driver.DepthRange(ctx, ctx->Viewport.Near, ctx->Viewport.Far);
+   ctx->Driver.DepthRange(ctx, 0, ctx->Viewport.Near, ctx->Viewport.Far);
 
    /* Update culling direction which changes depending on the
     * orientation of the buffer:
