@@ -333,7 +333,7 @@ void radeon_draw_buffer(struct gl_context *ctx, struct gl_framebuffer *fb)
 	radeon->NewGLState |= _NEW_SCISSOR;
 
 	if (ctx->Driver.DepthRange)
-		ctx->Driver.DepthRange(ctx,
+		ctx->Driver.DepthRange(ctx, 0,
 				       ctx->Viewport.Near,
 				       ctx->Viewport.Far);
 
