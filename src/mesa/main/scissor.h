@@ -36,7 +36,7 @@ _mesa_Scissor( GLint x, GLint y, GLsizei width, GLsizei height );
 
 
 extern void
-_mesa_set_scissor(struct gl_context *ctx, 
+_mesa_set_scissori(struct gl_context *ctx, GLuint index,
                   GLint x, GLint y, GLsizei width, GLsizei height);
 
 

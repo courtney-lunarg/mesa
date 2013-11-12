@@ -1426,13 +1426,21 @@ check_compatible(const struct gl_context *ctx,
 void
 _mesa_check_init_viewport(struct gl_context *ctx, GLuint width, GLuint height)
 {
+   GLuint i;
+
    if (!ctx->ViewportInitialized && width > 0 && height > 0) {
       /* Note: set flag here, before calling _mesa_set_viewport(), to prevent
        * potential infinite recursion.
        */
       ctx->ViewportInitialized = GL_TRUE;
       _mesa_set_viewport(ctx, 0, 0, width, height);
-      _mesa_set_scissor(ctx, 0, 0, width, height);
+      /* ARB_viewport_array specifies that glScissor is equivalent to
+       * calling glViewportArray with an array containing a single
+       * viewport once for each supported viewport.
+       */
+      for (i = 0; i < ctx->Const.MaxViewports; i++) {
+         _mesa_set_scissori(ctx, i, 0, 0, width, height);
+      }
    }
 }
 

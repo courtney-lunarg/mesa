@@ -35,6 +35,7 @@
 void GLAPIENTRY
 _mesa_Scissor( GLint x, GLint y, GLsizei width, GLsizei height )
 {
+   GLuint i;
    GET_CURRENT_CONTEXT(ctx);
 
    if (MESA_VERBOSE & VERBOSE_API)
@@ -45,7 +46,13 @@ _mesa_Scissor( GLint x, GLint y, GLsizei width, GLsizei height )
       return;
    }
 
-   _mesa_set_scissor(ctx, x, y, width, height);
+   /* ARB_viewport_array specifies that glScissor is equivalent to
+    * calling glViewportArray with an array containing a single
+    * viewport once for each supported viewport.
+    */
+   for (i = 0; i < ctx->Const.MaxViewports; i++) {
+      _mesa_set_scissori(ctx, i, x, y, width, height);
+   }
 }
 
 
@@ -63,23 +70,25 @@ _mesa_Scissor( GLint x, GLint y, GLsizei width, GLsizei height )
  * the dd_function_table::Scissor callback.
  */
 void
-_mesa_set_scissor(struct gl_context *ctx, 
+_mesa_set_scissori(struct gl_context *ctx, GLuint index,
                   GLint x, GLint y, GLsizei width, GLsizei height)
 {
-   if (x == ctx->Scissor.ScissorArray[0].X &&
-       y == ctx->Scissor.ScissorArray[0].Y &&
-       width == ctx->Scissor.ScissorArray[0].Width &&
-       height == ctx->Scissor.ScissorArray[0].Height)
+   if (x == ctx->Scissor.ScissorArray[index].X &&
+       y == ctx->Scissor.ScissorArray[index].Y &&
+       width == ctx->Scissor.ScissorArray[index].Width &&
+       height == ctx->Scissor.ScissorArray[index].Height)
       return;
 
    FLUSH_VERTICES(ctx, _NEW_SCISSOR);
-   ctx->Scissor.ScissorArray[0].X = x;
-   ctx->Scissor.ScissorArray[0].Y = y;
-   ctx->Scissor.ScissorArray[0].Width = width;
-   ctx->Scissor.ScissorArray[0].Height = height;
+   ctx->Scissor.ScissorArray[index].X = x;
+   ctx->Scissor.ScissorArray[index].Y = y;
+   ctx->Scissor.ScissorArray[index].Width = width;
+   ctx->Scissor.ScissorArray[index].Height = height;
 
    if (ctx->Driver.Scissor)
-      ctx->Driver.Scissor( ctx, 0, x, y, width, height );
+      ctx->Driver.Scissor(ctx, index,
+                          ctx->Scissor.ScissorArray[index].X, ctx->Scissor.ScissorArray[index].Y,
+                          ctx->Scissor.ScissorArray[index].Width, ctx->Scissor.ScissorArray[index].Height);
 }
 
 
@@ -90,10 +99,15 @@ _mesa_set_scissor(struct gl_context *ctx,
 void
 _mesa_init_scissor(struct gl_context *ctx)
 {
+   GLint i;
+
    /* Scissor group */
-   ctx->Scissor.EnableFlags = GL_FALSE;
-   ctx->Scissor.ScissorArray[0].X = 0;
-   ctx->Scissor.ScissorArray[0].Y = 0;
-   ctx->Scissor.ScissorArray[0].Width = 0;
-   ctx->Scissor.ScissorArray[0].Height = 0;
+   ctx->Scissor.EnableFlags = 0;
+
+   for (i = 0; i < MAX_VIEWPORTS; i++) {
+      ctx->Scissor.ScissorArray[i].X = 0;
+      ctx->Scissor.ScissorArray[i].Y = 0;
+      ctx->Scissor.ScissorArray[i].Width = 0;
+      ctx->Scissor.ScissorArray[i].Height = 0;
+   }
 }
