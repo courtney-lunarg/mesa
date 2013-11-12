@@ -1600,9 +1600,10 @@ void r200_vtbl_update_scissor( struct gl_context *ctx )
 }
 
 
-static void r200Viewport( struct gl_context *ctx, GLint x, GLint y,
+static void r200Viewport( struct gl_context *ctx, GLuint idx, GLint x, GLint y,
 			    GLsizei width, GLsizei height )
 {
+   (void) idx;
    (void) x;
    (void) y;
    (void) width;

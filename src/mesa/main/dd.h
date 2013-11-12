@@ -543,7 +543,8 @@ struct dd_function_table {
                         struct gl_texture_object *texObj,
                         GLenum pname, const GLfloat *params);
    /** Set the viewport */
-   void (*Viewport)(struct gl_context *ctx, GLint x, GLint y, GLsizei w, GLsizei h);
+   void (*Viewport)(struct gl_context *ctx, GLuint idx,
+                    GLint x, GLint y, GLsizei w, GLsizei h);
    /*@}*/
 
 
