@@ -141,8 +141,7 @@ void radeonUpdateScissor( struct gl_context *ctx )
 /* =============================================================
  * Scissoring
  */
-
-void radeonScissor(struct gl_context* ctx, GLint x, GLint y, GLsizei w, GLsizei h)
+void radeonScissor(struct gl_context* ctx, GLuint idx, GLint x, GLint y, GLsizei w, GLsizei h)
 {
 	radeonContextPtr radeon = RADEON_CONTEXT(ctx);
 	if (ctx->Scissor.Enabled) {

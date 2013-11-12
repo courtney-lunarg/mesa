@@ -501,7 +501,7 @@ i915PolygonStipple(struct gl_context * ctx, const GLubyte * mask)
  * Hardware clipping
  */
 static void
-i915Scissor(struct gl_context * ctx, GLint x, GLint y, GLsizei w, GLsizei h)
+i915Scissor(struct gl_context * ctx, GLuint idx, GLint x, GLint y, GLsizei w, GLsizei h)
 {
    struct i915_context *i915 = I915_CONTEXT(ctx);
    int x1, y1, x2, y2;
