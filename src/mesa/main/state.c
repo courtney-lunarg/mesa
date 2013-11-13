@@ -262,13 +262,11 @@ update_program_constants(struct gl_context *ctx)
    return new_state;
 }
 
-
-
-
 static void
 update_viewport_matrix(struct gl_context *ctx)
 {
    const GLfloat depthMax = ctx->DrawBuffer->_DepthMaxF;
+   GLint i;
 
    ASSERT(depthMax > 0);
 
@@ -276,11 +274,14 @@ update_viewport_matrix(struct gl_context *ctx)
     * and should be maintained elsewhere if at all.
     * NOTE: RasterPos uses this.
     */
-   _math_matrix_viewport(&ctx->Viewport._WindowMap,
-                         ctx->Viewport.X, ctx->Viewport.Y,
-                         ctx->Viewport.Width, ctx->Viewport.Height,
-                         ctx->Viewport.Near, ctx->Viewport.Far,
-                         depthMax);
+
+   for (i = 0; i < ctx->Const.MaxViewports; i++) {
+      _math_matrix_viewport(&ctx->ViewportArray[i]._WindowMap,
+                            ctx->ViewportArray[i].X, ctx->ViewportArray[i].Y,
+                            ctx->ViewportArray[i].Width, ctx->ViewportArray[i].Height,
+                            ctx->ViewportArray[i].Near, ctx->ViewportArray[i].Far,
+                            depthMax);
+   }
 }
 
 

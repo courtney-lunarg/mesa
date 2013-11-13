@@ -113,6 +113,7 @@ enum value_type {
    TYPE_FLOATN_3,
    TYPE_FLOATN_4,
    TYPE_DOUBLEN,
+   TYPE_DOUBLEN_2,
    TYPE_MATRIX,
    TYPE_MATRIX_T,
    TYPE_CONST
@@ -161,6 +162,8 @@ struct value_desc {
 union value {
    GLfloat value_float;
    GLfloat value_float_4[4];
+   GLdouble value_double_2[2];
+   GLdouble value_double_4[4];
    GLmatrix *value_matrix;
    GLint value_int;
    GLint value_int_4[4];
@@ -677,10 +680,15 @@ find_custom_value(struct gl_context *ctx, const struct value_desc *d, union valu
       break;
 
    case GL_VIEWPORT:
-      v->value_int_4[0] = ctx->Viewport.X;
-      v->value_int_4[1] = ctx->Viewport.Y;
-      v->value_int_4[2] = ctx->Viewport.Width;
-      v->value_int_4[3] = ctx->Viewport.Height;
+      v->value_float_4[0] = ctx->ViewportArray[0].X;
+      v->value_float_4[1] = ctx->ViewportArray[0].Y;
+      v->value_float_4[2] = ctx->ViewportArray[0].Width;
+      v->value_float_4[3] = ctx->ViewportArray[0].Height;
+      break;
+
+   case GL_DEPTH_RANGE:
+      v->value_double_2[0] = ctx->ViewportArray[0].Near;
+      v->value_double_2[1] = ctx->ViewportArray[0].Far;
       break;
 
    case GL_ACTIVE_STENCIL_FACE_EXT:
