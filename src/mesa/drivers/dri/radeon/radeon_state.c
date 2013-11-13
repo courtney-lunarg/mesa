@@ -1383,8 +1383,9 @@ void radeonUpdateWindow( struct gl_context *ctx )
 }
 
 
-static void radeonViewport( struct gl_context *ctx, GLuint idx, GLint x, GLint y,
-			    GLsizei width, GLsizei height )
+static void radeonViewport( struct gl_context *ctx, GLuint idx,
+                            GLfloat x, GLfloat y,
+			    GLfloat width, GLfloat height )
 {
    (void) x;
    (void) y;
