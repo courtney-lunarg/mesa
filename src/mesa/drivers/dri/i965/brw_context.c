@@ -507,6 +507,12 @@ brw_initialize_context_constants(struct brw_context *brw)
    }
 
    ctx->ShaderCompilerOptions[MESA_SHADER_VERTEX].PreferDP4 = true;
+
+   /* ARB_viewport_array */
+   ctx->Const.MaxViewports = 16;
+   ctx->Const.ViewportSubpixelBits = 0;
+   ctx->Const.ViewportBounds.Min = -ctx->Const.MaxViewportWidth;
+   ctx->Const.ViewportBounds.Max = ctx->Const.MaxViewportWidth;
 }
 
 /**

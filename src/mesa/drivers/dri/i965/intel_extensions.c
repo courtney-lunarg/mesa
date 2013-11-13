@@ -139,6 +139,7 @@ intelInitExtensions(struct gl_context *ctx)
    ctx->Extensions.ARB_vertex_program = true;
    ctx->Extensions.ARB_vertex_shader = true;
    ctx->Extensions.ARB_vertex_type_2_10_10_10_rev = true;
+   ctx->Extensions.ARB_viewport_array = true;
    ctx->Extensions.EXT_blend_color = true;
    ctx->Extensions.EXT_blend_equation_separate = true;
    ctx->Extensions.EXT_blend_func_separate = true;
