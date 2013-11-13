@@ -463,8 +463,10 @@ _mesa_PushAttrib(GLbitfield mask)
 
    if (mask & GL_VIEWPORT_BIT) {
       struct gl_viewport_attrib *attr;
-      attr = MALLOC_STRUCT( gl_viewport_attrib );
-      memcpy( attr, &ctx->Viewport, sizeof(struct gl_viewport_attrib) );
+      attr = (struct gl_viewport_attrib *) MALLOC(sizeof(struct gl_viewport_attrib)
+              * ctx->Const.MaxViewports);
+      memcpy( attr, &ctx->ViewportArray, sizeof(struct gl_viewport_attrib)
+              * ctx->Const.MaxViewports);
       save_attrib_data(&head, GL_VIEWPORT_BIT, attr);
    }
 
