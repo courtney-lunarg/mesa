@@ -271,7 +271,7 @@ _mesa_init_driver_state(struct gl_context *ctx)
    ctx->Driver.Enable(ctx, GL_LIGHTING, ctx->Light.Enabled);
    ctx->Driver.Enable(ctx, GL_LINE_SMOOTH, ctx->Line.SmoothFlag);
    ctx->Driver.Enable(ctx, GL_POLYGON_STIPPLE, ctx->Polygon.StippleFlag);
-   ctx->Driver.Enable(ctx, GL_SCISSOR_TEST, ctx->Scissor.Enabled);
+   ctx->Driver.Enable(ctx, GL_SCISSOR_TEST, ctx->Scissor.EnableFlags);
    ctx->Driver.Enable(ctx, GL_STENCIL_TEST, ctx->Stencil._Enabled);
    ctx->Driver.Enable(ctx, GL_TEXTURE_1D, GL_FALSE);
    ctx->Driver.Enable(ctx, GL_TEXTURE_2D, GL_FALSE);
@@ -295,12 +295,19 @@ _mesa_init_driver_state(struct gl_context *ctx)
       ctx->Driver.LightModelfv(ctx, GL_LIGHT_MODEL_COLOR_CONTROL, &f);
    }
 
+   {
+      GLint i;
+      for (i = 0; i < ctx->Const.MaxViewports; i++) {
+         ctx->Driver.Scissor(ctx, i,
+                             ctx->Scissor.ScissorArray[i].X, ctx->Scissor.ScissorArray[i].Y,
+                             ctx->Scissor.ScissorArray[i].Width, ctx->Scissor.ScissorArray[i].Height);
+      }
+   }
+
    ctx->Driver.LineWidth(ctx, ctx->Line.Width);
    ctx->Driver.LogicOpcode(ctx, ctx->Color.LogicOp);
    ctx->Driver.PointSize(ctx, ctx->Point.Size);
    ctx->Driver.PolygonStipple(ctx, (const GLubyte *) ctx->PolygonStipple);
-   ctx->Driver.Scissor(ctx, 0, ctx->Scissor.X, ctx->Scissor.Y,
-                       ctx->Scissor.Width, ctx->Scissor.Height);
    ctx->Driver.ShadeModel(ctx, ctx->Light.ShadeModel);
    ctx->Driver.StencilFuncSeparate(ctx, GL_FRONT,
                                    ctx->Stencil.Function[0],
