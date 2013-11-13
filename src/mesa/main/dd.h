@@ -545,7 +545,8 @@ struct dd_function_table {
                         GLenum pname, const GLfloat *params);
    /** Set the viewport */
    void (*Viewport)(struct gl_context *ctx, GLuint idx,
-                    GLint x, GLint y, GLsizei w, GLsizei h);
+                    GLfloat X, GLfloat Y,
+                    GLfloat Width, GLfloat Height);
    /*@}*/
 
 

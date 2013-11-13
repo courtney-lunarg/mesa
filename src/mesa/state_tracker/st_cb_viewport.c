@@ -49,8 +49,8 @@ st_ws_framebuffer(struct gl_framebuffer *fb)
 }
 
 static void st_viewport(struct gl_context * ctx, GLuint idx,
-                        GLint x, GLint y,
-                        GLsizei width, GLsizei height)
+                        GLfloat X, GLfloat Y,
+                        GLfloat Width, GLfloat Height)
 {
    struct st_context *st = ctx->st;
    struct st_framebuffer *stdraw;

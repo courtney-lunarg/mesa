@@ -271,12 +271,12 @@ intel_prepare_render(struct intel_context *intel)
 }
 
 static void
-intel_noninvalidate_viewport(struct gl_context *ctx, GLuint idx, GLint x, GLint y,
-                             GLsizei w, GLsizei h)
+intel_viewport(struct gl_context *ctx, GLuint idx, GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 {
     struct intel_context *intel = intel_context(ctx);
     __DRIcontext *driContext = intel->driContext;
 
+    (void) idx;
     (void) x;
     (void) y;
     (void) w;
@@ -291,8 +291,9 @@ intel_noninvalidate_viewport(struct gl_context *ctx, GLuint idx, GLint x, GLint 
 }
 
 static void
-intel_viewport(struct gl_context *ctx, GLuint idx, GLint x, GLint y, GLsizei w, GLsizei h)
+intel_noninvalidate_viewport(struct gl_context *ctx, GLuint idx, GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 {
+    (void) idx;
     (void) x;
     (void) y;
     (void) w;
