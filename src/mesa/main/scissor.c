@@ -109,7 +109,7 @@ _mesa_ScissorArrayv(GLuint first, GLsizei count, const GLint * v)
    struct gl_scissor_rect *p = (struct gl_scissor_rect *) v;
    GET_CURRENT_CONTEXT(ctx);
 
-   if ((first + count) >= ctx->Const.MaxViewports) {
+   if ((first + count) > ctx->Const.MaxViewports) {
       _mesa_error(ctx, GL_INVALID_VALUE,
                   "glScissorArrayv: first (%d) + count (%d) >= MaxViewports (%d)",
                   first, count, ctx->Const.MaxViewports);
