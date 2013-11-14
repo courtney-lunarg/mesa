@@ -46,8 +46,8 @@ _mesa_ViewportIndexedfv(GLuint index, const GLfloat * v);
 
 extern void 
 _mesa_set_viewporti(struct gl_context *ctx, GLuint index,
-                    GLint x, GLint y,
-                    GLsizei width, GLsizei height);
+                    GLfloat x, GLfloat y,
+                    GLfloat width, GLfloat height);
 
 extern void
 _mesa_set_depthrangei(struct gl_context *ctx, GLuint index,
