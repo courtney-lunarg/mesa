@@ -34,11 +34,24 @@ struct gl_context;
 extern void GLAPIENTRY
 _mesa_Viewport(GLint x, GLint y, GLsizei width, GLsizei height);
 
+extern void GLAPIENTRY
+_mesa_ViewportArrayv(GLuint first, GLsizei count, const GLfloat * v);
+
+extern void GLAPIENTRY
+_mesa_ViewportIndexedf(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
+
+extern void GLAPIENTRY
+_mesa_ViewportIndexedfv(GLuint index, const GLfloat * v);
+
 
 extern void 
-_mesa_set_viewport(struct gl_context *ctx, GLint x, GLint y,
-                   GLsizei width, GLsizei height);
+_mesa_set_viewporti(struct gl_context *ctx, GLuint index,
+                    GLint x, GLint y,
+                    GLsizei width, GLsizei height);
 
+extern void
+_mesa_set_depthrangei(struct gl_context *ctx, GLuint index,
+                      GLclampd nearval, GLclampd farval);
 
 extern void GLAPIENTRY
 _mesa_DepthRange(GLclampd nearval, GLclampd farval);
@@ -46,6 +59,11 @@ _mesa_DepthRange(GLclampd nearval, GLclampd farval);
 extern void GLAPIENTRY
 _mesa_DepthRangef(GLclampf nearval, GLclampf farval);
 
+extern void GLAPIENTRY
+_mesa_DepthRangeArrayv(GLuint first, GLsizei count, const GLclampd * v);
+
+extern void GLAPIENTRY
+_mesa_DepthRangeIndexed(GLuint index, GLclampd n, GLclampd f);
 
 extern void 
 _mesa_init_viewport(struct gl_context *ctx);
