@@ -1091,8 +1091,8 @@ _mesa_meta_end(struct gl_context *ctx)
           save->ViewportY != ctx->ViewportArray[0].Y ||
           save->ViewportW != ctx->ViewportArray[0].Width ||
           save->ViewportH != ctx->ViewportArray[0].Height) {
-         _mesa_set_viewport(ctx, save->ViewportX, save->ViewportY,
-                            save->ViewportW, save->ViewportH);
+         _mesa_Viewport(save->ViewportX, save->ViewportY,
+                        save->ViewportW, save->ViewportH);
       }
       _mesa_DepthRange(save->DepthNear, save->DepthFar);
    }
@@ -1759,7 +1759,7 @@ blitframebuffer_texture(struct gl_context *ctx,
          }
 
          /* setup viewport */
-         _mesa_set_viewport(ctx, dstX, dstY, dstW, dstH);
+         _mesa_Viewport(dstX, dstY, dstW, dstH);
          _mesa_ColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
          _mesa_DepthMask(GL_FALSE);
          _mesa_DrawArrays(GL_TRIANGLE_FAN, 0, 4);
@@ -1914,7 +1914,7 @@ _mesa_meta_BlitFramebuffer(struct gl_context *ctx,
          _mesa_BufferSubData(GL_ARRAY_BUFFER_ARB, 0, sizeof(verts), verts);
       }
 
-      _mesa_set_viewport(ctx, dstX, dstY, dstW, dstH);
+      _mesa_Viewport(dstX, dstY, dstW, dstH);
       _mesa_ColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
       _mesa_set_enable(ctx, GL_DEPTH_TEST, GL_FALSE);
       _mesa_DepthMask(GL_FALSE);
@@ -1963,7 +1963,7 @@ _mesa_meta_BlitFramebuffer(struct gl_context *ctx,
          _mesa_DepthFunc(GL_ALWAYS);
          _mesa_DepthMask(GL_TRUE);
 
-         _mesa_set_viewport(ctx, dstX, dstY, dstW, dstH);
+         _mesa_Viewport(dstX, dstY, dstW, dstH);
          _mesa_BufferSubData(GL_ARRAY_BUFFER_ARB, 0, sizeof(verts), verts);
          _mesa_DrawArrays(GL_TRIANGLE_FAN, 0, 4);
          mask &= ~GL_DEPTH_BUFFER_BIT;
@@ -3736,7 +3736,7 @@ _mesa_meta_GenerateMipmap(struct gl_context *ctx, GLenum target,
       assert(dstHeight == ctx->DrawBuffer->Height);
 
       /* setup viewport */
-      _mesa_set_viewport(ctx, 0, 0, dstWidth, dstHeight);
+      _mesa_Viewport(0, 0, dstWidth, dstHeight);
 
       _mesa_DrawArrays(GL_TRIANGLE_FAN, 0, 4);
    }
@@ -4026,7 +4026,7 @@ decompress_texture_image(struct gl_context *ctx,
    _mesa_MatrixMode(GL_PROJECTION);
    _mesa_LoadIdentity();
    _mesa_Ortho(0.0, width, 0.0, height, -1.0, 1.0);
-   _mesa_set_viewport(ctx, 0, 0, width, height);
+   _mesa_Viewport(0, 0, width, height);
 
    /* upload new vertex data */
    _mesa_BufferSubData(GL_ARRAY_BUFFER_ARB, 0, sizeof(verts), verts);
