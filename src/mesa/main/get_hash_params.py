@@ -22,7 +22,7 @@ descriptor=[
   [ "MAX_ELEMENTS_VERTICES", "CONTEXT_INT(Const.MaxArrayLockSize), NO_EXTRA" ],
   [ "MAX_ELEMENTS_INDICES", "CONTEXT_INT(Const.MaxArrayLockSize), NO_EXTRA" ],
   [ "MAX_TEXTURE_SIZE", "LOC_CUSTOM, TYPE_INT, offsetof(struct gl_context, Const.MaxTextureLevels), NO_EXTRA" ],
-  [ "MAX_VIEWPORT_DIMS", "CONTEXT_INT2(Const.MaxViewportWidth), NO_EXTRA" ],
+  [ "MAX_VIEWPORT_DIMS", "CONTEXT_FLOAT2(Const.MaxViewportWidth), NO_EXTRA" ],
   [ "PACK_ALIGNMENT", "CONTEXT_INT(Pack.Alignment), NO_EXTRA" ],
   [ "ALIASED_POINT_SIZE_RANGE", "CONTEXT_FLOAT2(Const.MinPointSize), NO_EXTRA" ],
   [ "POLYGON_OFFSET_FACTOR", "CONTEXT_FLOAT(Polygon.OffsetFactor ), NO_EXTRA" ],
@@ -44,7 +44,7 @@ descriptor=[
   [ "SUBPIXEL_BITS", "CONTEXT_INT(Const.SubPixelBits), NO_EXTRA" ],
   [ "TEXTURE_BINDING_2D", "LOC_CUSTOM, TYPE_INT, TEXTURE_2D_INDEX, NO_EXTRA" ],
   [ "UNPACK_ALIGNMENT", "CONTEXT_INT(Unpack.Alignment), NO_EXTRA" ],
-  [ "VIEWPORT", "LOC_CUSTOM, TYPE_INT_4, 0, NO_EXTRA" ],
+  [ "VIEWPORT", "LOC_CUSTOM, TYPE_FLOAT_4, 0, NO_EXTRA" ],
 
 # GL_ARB_multitexture
   [ "ACTIVE_TEXTURE", "LOC_CUSTOM, TYPE_INT, 0, NO_EXTRA" ],
@@ -741,6 +741,13 @@ descriptor=[
 # GL_ARB_vertex_attrib_binding
   [ "MAX_VERTEX_ATTRIB_RELATIVE_OFFSET", "CONTEXT_ENUM(Const.MaxVertexAttribRelativeOffset), NO_EXTRA" ],
   [ "MAX_VERTEX_ATTRIB_BINDINGS", "CONTEXT_ENUM(Const.MaxVertexAttribBindings), NO_EXTRA" ],
+
+# GL_ARB_viewport_array
+  [ "MAX_VIEWPORTS", "CONTEXT_INT(Const.MaxViewports), extra_ARB_viewport_array" ],
+  [ "VIEWPORT_SUBPIXEL_BITS", "CONTEXT_INT(Const.ViewportSubpixelBits), extra_ARB_viewport_array" ],
+  [ "VIEWPORT_BOUNDS_RANGE", "CONTEXT_FLOAT2(Const.ViewportBounds), extra_ARB_viewport_array" ],
+  [ "LAYER_PROVOKING_VERTEX", "CONTEXT_ENUM(Light.ProvokingVertex), extra_ARB_viewport_array" ],
+  [ "VIEWPORT_INDEX_PROVOKING_VERTEX", "CONTEXT_ENUM(Light.ProvokingVertex), extra_ARB_viewport_array" ],
 ]},
 
 # Enums restricted to OpenGL Core profile

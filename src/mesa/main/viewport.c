@@ -182,8 +182,8 @@ _mesa_ViewportIndexedfv(GLuint index, const GLfloat * v)
  */
 void
 _mesa_set_viewporti(struct gl_context *ctx, GLuint index,
-                    GLint x, GLint y,
-                    GLsizei width, GLsizei height)
+                    GLfloat x, GLfloat y,
+                    GLfloat width, GLfloat height)
 {
    /* clamp width and height to the implementation dependent range */
    width = MIN2(width, (GLsizei) ctx->Const.MaxViewportWidth);
@@ -325,9 +325,7 @@ _mesa_DepthRangeArrayv(GLuint first, GLsizei count, const GLclampd * v)
    }
 
    for (i = 0; i < count; i++) {
-      _mesa_set_depthrangei(ctx, i + first,
-                            (GLdouble) CLAMP(p[i].Near, 0.0, 1.0),
-                            (GLdouble) CLAMP(p[i].Far, 0.0, 1.0));
+      _mesa_set_depthrangei(ctx, i + first, p[i].Near, p[i].Far);
    }
 }
 
