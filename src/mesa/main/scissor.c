@@ -86,9 +86,7 @@ _mesa_set_scissori(struct gl_context *ctx, GLuint index,
    ctx->Scissor.ScissorArray[index].Height = height;
 
    if (ctx->Driver.Scissor)
-      ctx->Driver.Scissor(ctx, index,
-                          ctx->Scissor.ScissorArray[index].X, ctx->Scissor.ScissorArray[index].Y,
-                          ctx->Scissor.ScissorArray[index].Width, ctx->Scissor.ScissorArray[index].Height);
+      ctx->Driver.Scissor(ctx, index);
 }
 
 /**

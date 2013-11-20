@@ -837,8 +837,7 @@ i830_update_draw_buffer(struct intel_context *intel)
 
    /* Set state we know depends on drawable parameters:
     */
-   ctx->Driver.Scissor(ctx, 0, ctx->Scissor.ScissorArray[0].X, ctx->Scissor.ScissorArray[0].Y,
-		       ctx->Scissor.ScissorArray[0].Width, ctx->Scissor.ScissorArray[0].Height);
+   ctx->Driver.Scissor(ctx, 0);
 
    ctx->Driver.DepthRange(ctx, 0, ctx->ViewportArray[0].Near, ctx->ViewportArray[0].Far);
 

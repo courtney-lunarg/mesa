@@ -298,9 +298,7 @@ _mesa_init_driver_state(struct gl_context *ctx)
    {
       GLint i;
       for (i = 0; i < ctx->Const.MaxViewports; i++) {
-         ctx->Driver.Scissor(ctx, i,
-                             ctx->Scissor.ScissorArray[i].X, ctx->Scissor.ScissorArray[i].Y,
-                             ctx->Scissor.ScissorArray[i].Width, ctx->Scissor.ScissorArray[i].Height);
+         ctx->Driver.Scissor(ctx, i);
       }
    }
 

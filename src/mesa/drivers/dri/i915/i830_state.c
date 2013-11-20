@@ -527,7 +527,7 @@ i830PolygonStipple(struct gl_context * ctx, const GLubyte * mask)
  * Hardware clipping
  */
 static void
-i830Scissor(struct gl_context * ctx, GLuint idx, GLint x, GLint y, GLsizei w, GLsizei h)
+i830Scissor(struct gl_context * ctx, GLuint idx)
 {
    struct i830_context *i830 = i830_context(ctx);
    int x1, y1, x2, y2;
@@ -535,22 +535,26 @@ i830Scissor(struct gl_context * ctx, GLuint idx, GLint x, GLint y, GLsizei w, GL
    if (!ctx->DrawBuffer)
       return;
 
-   DBG("%s %d,%d %dx%d\n", __FUNCTION__, x, y, w, h);
+   DBG("%s idx=%d %d,%d %dx%d\n", __FUNCTION__, idx,
+       ctx->Scissor.ScissorArray[idx].X,
+       ctx->Scissor.ScissorArray[idx].Y,
+       ctx->Scissor.ScissorArray[idx].Width,
+       ctx->Scissor.ScissorArray[idx].Height);
 
    if (_mesa_is_winsys_fbo(ctx->DrawBuffer)) {
-      x1 = x;
-      y1 = ctx->DrawBuffer->Height - (y + h);
-      x2 = x + w - 1;
-      y2 = y1 + h - 1;
+      x1 = ctx->Scissor.ScissorArray[idx].X;
+      y1 = ctx->DrawBuffer->Height - (ctx->Scissor.ScissorArray[idx].Y + ctx->Scissor.ScissorArray[idx].Height);
+      x2 = ctx->Scissor.ScissorArray[idx].X + ctx->Scissor.ScissorArray[idx].Width - 1;
+      y2 = y1 + ctx->Scissor.ScissorArray[idx].Height - 1;
       DBG("%s %d..%d,%d..%d (inverted)\n", __FUNCTION__, x1, x2, y1, y2);
    }
    else {
       /* FBO - not inverted
        */
-      x1 = x;
-      y1 = y;
-      x2 = x + w - 1;
-      y2 = y + h - 1;
+      x1 = ctx->Scissor.ScissorArray[idx].X;
+      y1 = ctx->Scissor.ScissorArray[idx].Y;
+      x2 = ctx->Scissor.ScissorArray[idx].X + ctx->Scissor.ScissorArray[idx].Width - 1;
+      y2 = ctx->Scissor.ScissorArray[idx].Y + ctx->Scissor.ScissorArray[idx].Height - 1;
       DBG("%s %d..%d,%d..%d (not inverted)\n", __FUNCTION__, x1, x2, y1, y2);
    }
 
