@@ -256,7 +256,7 @@ _mesa_set_depthrangei(struct gl_context *ctx, GLuint index,
 #endif
 
    if (ctx->Driver.DepthRange) {
-      ctx->Driver.DepthRange(ctx, index, nearval, farval);
+      ctx->Driver.DepthRange(ctx, index);
    }
 }
 
