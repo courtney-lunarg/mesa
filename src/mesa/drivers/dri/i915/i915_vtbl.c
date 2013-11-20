@@ -811,7 +811,7 @@ i915_update_draw_buffer(struct intel_context *intel)
 
    /* Set state we know depends on drawable parameters:
     */
-   ctx->Driver.DepthRange(ctx, 0, ctx->ViewportArray[0].Near, ctx->ViewportArray[0].Far);
+   ctx->Driver.DepthRange(ctx, 0);
    ctx->Driver.Scissor(ctx, 0);
 
    /* Update culling direction which changes depending on the
