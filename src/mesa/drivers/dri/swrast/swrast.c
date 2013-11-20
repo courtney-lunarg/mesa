@@ -618,16 +618,13 @@ update_state( struct gl_context *ctx, GLuint new_state )
 }
 
 static void
-viewport(struct gl_context *ctx, GLuint idx,
-         GLfloat x, GLfloat y, GLfloat w, GLfloat h)
+viewport(struct gl_context *ctx, GLuint idx)
 {
     struct gl_framebuffer *draw = ctx->WinSysDrawBuffer;
     struct gl_framebuffer *read = ctx->WinSysReadBuffer;
 
-    (void) x;
-    (void) y;
-    (void) w;
-    (void) h;
+    (void) idx;
+
     swrast_check_and_update_window_size(ctx, draw);
     swrast_check_and_update_window_size(ctx, read);
 }
